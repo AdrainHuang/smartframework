@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--suppress SpringFacetInspection, XmlUnusedNamespaceDeclaration -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                            http://www.springframework.org/schema/context
+                            http://www.springframework.org/schema/context/spring-context.xsd
+                            http://www.springframework.org/schema/aop
+                            http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <context:component-scan base-package="aop.demo"/>
+
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <bean id="greetingProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <!--需要实现的接口-->
+        <property name="interfaces" value="aop.demo.Apology"/>
+        <!--目标类-->
+        <property name="target" ref="greetingImpl"/>
+        <!--引入增强-->
+        <property name="interceptorNames" value="greetingIntroAdvice"/>
+        <!--代理目标类（默认为 false, 代理接口）-->
+        <property name="proxyTargetClass" value="true"/>
+    </bean>
+
+    <!--配置一个切面-->
+    <bean id="greetingAdviosr" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+        <!--增强-->
+        <property name="advice" ref="greetingAroundAdvice"/>
+        <!--切点正则表达式-->
+        <property name="pattern" value="aop.demo.GreetingImpl.good.*"/>
+    </bean>
+
+    <!--配置一个代理-->
+    <bean id="greetingProxy1" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <!--目标类-->
+        <property name="target" ref="greetingImpl"/>
+        <!--切面-->
+        <property name="interceptorNames" value="greetingAdvisor"/>
+        <!--代理目标类-->
+        <property name="proxyTargetClass" value="true"/>
+    </bean>
+</beans>
