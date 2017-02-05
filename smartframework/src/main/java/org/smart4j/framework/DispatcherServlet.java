@@ -9,7 +9,10 @@ import org.smart4j.framework.helper.ConfigHelper;
 import org.smart4j.framework.helper.ControllerHelper;
 import org.smart4j.framework.util.*;
 
-import javax.servlet.*;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRegistration;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -78,7 +81,12 @@ public class DispatcherServlet extends HttpServlet {
 			//调用 Action方法
 			Method acctionMethod = handler.getAcctionMethod();
 			//TODO 为了框架能走下去所以 第三个参数 设置为Null值了。
-			Object result = ReflectionUtil.invokeMethod(controllerBean, acctionMethod, param);
+			Object result;
+			if (param.isEmpty()){
+				result = ReflectionUtil.invokeMethod(controllerBean,acctionMethod);
+			}else {
+				result = ReflectionUtil.invokeMethod(controllerBean, acctionMethod, param);
+			}
 			//处理 Actoin 方法返回值
 			if (result instanceof View){
 				//返回JSP页面

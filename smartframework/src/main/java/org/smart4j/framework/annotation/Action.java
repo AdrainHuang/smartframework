@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
 public @interface Action {
 
 	/**
-	 * 请求类型与路径g gjdskglfdjasl
+	 * 请求类型与路径
 	 */
 	String value();
 }

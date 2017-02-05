@@ -74,4 +74,13 @@ public class AopHelper {
 		}
 		return targetClassSet;
 	}
+
+	private static void addAspectProxy(Map<Class<?>, Set<Class<?>>> proxyMap) throws Exception {
+		Set<Class<?>> proxyClassSet = ClassHelper.getClassSetBySuper(AspectProxy.class);
+		for (Class<?> proxyClass : proxyClassSet){
+			Aspect aspect = proxyClass.getAnnotation(Aspect.class);
+			Set<Class<?>> targetClassSet = createTargetClassSet(aspect);
+			proxyMap.put(proxyClass,targetClassSet);
+		}
+	}
 }
