@@ -39,9 +39,11 @@ public class DBUtil {
 		Connection conn = conContainer.get();
 		if (conn != null){
 			try {
-				conn.
+				conn.close();
 			} catch (Exception e) {
 				e.printStackTrace();
+			} finally {
+				conContainer.remove();
 			}
 		}
 	}

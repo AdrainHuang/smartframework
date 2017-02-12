@@ -30,7 +30,6 @@
     <packaging>war</packaging>
 
 
-
     <dependencies>
         <!--Servlet-->
         <dependency>
