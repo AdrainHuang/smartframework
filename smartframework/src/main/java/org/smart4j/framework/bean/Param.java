@@ -37,9 +37,9 @@ public class Param {
 	/**
 	 * 根据参数名获取 long 型参数值
 	 */
-	public long getLong(String name){
-		return CastUtil.castLong(paramMap.get(name));
-	}
+//	public long getLong(String name){
+//		return CastUtil.castLong(paramMap.get(name));
+//	}
 
 	public Map<String, Object> getParamMap() {
 		return paramMap;
@@ -48,9 +48,9 @@ public class Param {
 	/**
 	 * 验证参数是否为空
 	 */
-	public boolean isEmpty() {
-		return CollectionUtil.isEmpty(paramMap);
-	}
+//	public boolean isEmpty() {
+//		return CollectionUtil.isEmpty(paramMap);
+//	}
 
 	/**
 	 * 请求参数映射
@@ -112,7 +112,35 @@ public class Param {
 	/**
 	 * 验证参数是否为空
 	 */
-//	public boolean isEmpty(){
-//		return CollectionUtil.isEmpty(formParamList) && CollectionUtil.isNotEmpty(fileParamList);
-//	}
+	public boolean isEmpty(){
+		return CollectionUtil.isEmpty(formParamList) && CollectionUtil.isNotEmpty(fileParamList);
+	}
+
+	/**
+	 * 根据参数名称获取 String 型参数值
+	 */
+	public String getString(String name){
+		return CastUtil.castString(getFieldMap().get(name));
+	}
+
+	/**
+	 * 根据参数名称获取 double 型参数值
+	 */
+	public double getDouble(String name){
+		return CastUtil.castDouble(getFieldMap().get(name));
+	}
+
+	/**
+	 * 根据参数名称获取 long 型参数值
+	 */
+	public long getLong(String name){
+		return CastUtil.castLong(getFieldMap().get(name));
+	}
+
+	/**
+	 * 根据参数名称获取 boolean 型参数值
+	 */
+	public boolean getBoolean(String name){
+		return CastUtil.castBoolean(getFieldMap().get(name));
+	}
 }

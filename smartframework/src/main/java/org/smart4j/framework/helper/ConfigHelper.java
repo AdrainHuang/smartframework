@@ -1,6 +1,5 @@
 package org.smart4j.framework.helper;
 
-import org.omg.CORBA.PUBLIC_MEMBER;
 import org.smart4j.framework.ConfigConstant;
 import org.smart4j.framework.util.PropsUtil;
 
@@ -60,5 +59,9 @@ public class ConfigHelper {
 	 */
 	public static String getAppAssetPath(){
 		return PropsUtil.getString(CONFIG_PROPS, ConfigConstant.APP_ASSET_PATH);
+	}
+
+	public static int getAppLoadLimit() {
+		return PropsUtil.getInt(CONFIG_PROPS,ConfigConstant.APP_UPLOAD_LIMIT,10);
 	}
 }
